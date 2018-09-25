@@ -38,11 +38,11 @@ There are two forces that results from movement of the air on an airfoil, called
 <br>
 And there is a mathematical model which is applied to the design of sails we'll be using for this algorithm that is
 
-$F = \frac{1}{2} \rho V^2A  \cdot C_{F}$
+<a href="https://www.codecogs.com/eqnedit.php?latex=F&space;=&space;\frac{1}{2}&space;\rho&space;V^2A&space;\cdot&space;C_{F}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F&space;=&space;\frac{1}{2}&space;\rho&space;V^2A&space;\cdot&space;C_{F}" title="F = \frac{1}{2} \rho V^2A \cdot C_{F}" /></a>
 
-where $C_{F}$ is the coefficient for the force, that could be $C_{D}$ for drag force and $C_{L}$ for lift force, both of them depending on $\alpha$, which is the angle of attack (or the angle between the apparent wind and the sail).
+where <a href="https://www.codecogs.com/eqnedit.php?latex=C_{F}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_{F}" title="C_{F}" /></a> is the coefficient for the force, that could be <a href="https://www.codecogs.com/eqnedit.php?latex=C_{D}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_{D}" title="C_{D}" /></a> for drag force and <a href="https://www.codecogs.com/eqnedit.php?latex=C_{L}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_{L}" title="C_{L}" /></a> for lift force, both of them depending on <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha" title="\alpha" /></a>, which is the angle of attack (or the angle between the apparent wind and the sail).
 
-Working on the forces on sail, we can see that there's a force that "pushes" the vessel forward, called the Driving force($F_R$), indicated below on Picture 3, as Lift Force ($L$) and Drag Force ($D$):
+Working on the forces on sail, we can see that there's a force that "pushes" the vessel forward, called the Driving force(<a href="https://www.codecogs.com/eqnedit.php?latex=F_R" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_R" title="F_R" /></a>), indicated below on Picture 3, as Lift Force (<a href="https://www.codecogs.com/eqnedit.php?latex=L" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L" title="L" /></a>) and Drag Force (<a href="https://www.codecogs.com/eqnedit.php?latex=D" target="_blank"><img src="https://latex.codecogs.com/gif.latex?D" title="D" /></a>):
 
 <br>
 <table align="center">
@@ -53,21 +53,21 @@ Working on the forces on sail, we can see that there's a force that "pushes" the
 
 In order to compute the driving force, we have:
 
-$F_R = L \cdot sin(\alpha) - D\cdot cos(\alpha)$
+<a href="https://www.codecogs.com/eqnedit.php?latex=F_R&space;=&space;L&space;\cdot&space;sin(\alpha)&space;-&space;D\cdot&space;cos(\alpha)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_R&space;=&space;L&space;\cdot&space;sin(\alpha)&space;-&space;D\cdot&space;cos(\alpha)" title="F_R = L \cdot sin(\alpha) - D\cdot cos(\alpha)" /></a>
 
 what gives us:
 
-$F_R = \frac{1}{2} \rho V^2A  \cdot  (C_{L} \cdot sin(\alpha) - C_{D} \cdot cos(\alpha))$
+<a href="https://www.codecogs.com/eqnedit.php?latex=F_R&space;=&space;\frac{1}{2}&space;\rho&space;V^2A&space;\cdot&space;(C_{L}&space;\cdot&space;sin(\alpha)&space;-&space;C_{D}&space;\cdot&space;cos(\alpha))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_R&space;=&space;\frac{1}{2}&space;\rho&space;V^2A&space;\cdot&space;(C_{L}&space;\cdot&space;sin(\alpha)&space;-&space;C_{D}&space;\cdot&space;cos(\alpha))" title="F_R = \frac{1}{2} \rho V^2A \cdot (C_{L} \cdot sin(\alpha) - C_{D} \cdot cos(\alpha))" /></a>
 
-Considering we aren't able to increase $A$, the area of the sail, and since we can't change $\rho$, which is the density of the air, we can assume them as constants so, in order to increase $F_R$ we need to increase either $V$, the speed of the apparent wind, or maximize $C_{L} \cdot sin(\alpha) - C_{D} \cdot cos(\alpha)$, which from now on I'll call $C_R$, or *"driving force coefficient"*, so
+Considering we aren't able to increase <a href="https://www.codecogs.com/eqnedit.php?latex=A" target="_blank"><img src="https://latex.codecogs.com/gif.latex?A" title="A" /></a>, the area of the sail, and since we can't change <a href="https://www.codecogs.com/eqnedit.php?latex=\rho" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\rho" title="\rho" /></a>, which is the density of the air, we can assume them as constants so, in order to increase <a href="https://www.codecogs.com/eqnedit.php?latex=F_R" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_R" title="F_R" /></a> we need to increase either <a href="https://www.codecogs.com/eqnedit.php?latex=V" target="_blank"><img src="https://latex.codecogs.com/gif.latex?V" title="V" /></a>, the speed of the apparent wind, or maximize <a href="https://www.codecogs.com/eqnedit.php?latex=C_{L}&space;\cdot&space;sin(\alpha)&space;-&space;C_{D}&space;\cdot&space;cos(\alpha)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_{L}&space;\cdot&space;sin(\alpha)&space;-&space;C_{D}&space;\cdot&space;cos(\alpha)" title="C_{L} \cdot sin(\alpha) - C_{D} \cdot cos(\alpha)" /></a>, which from now on I'll call <a href="https://www.codecogs.com/eqnedit.php?latex=C_R" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_R" title="C_R" /></a>, or *"driving force coefficient"*, so
 
-$C_R = C_{L} \cdot sin(\alpha) - C_{D} \cdot cos(\alpha)$
+<a href="https://www.codecogs.com/eqnedit.php?latex=C_R&space;=&space;C_{L}&space;\cdot&space;sin(\alpha)&space;-&space;C_{D}&space;\cdot&space;cos(\alpha)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_R&space;=&space;C_{L}&space;\cdot&space;sin(\alpha)&space;-&space;C_{D}&space;\cdot&space;cos(\alpha)" title="C_R = C_{L} \cdot sin(\alpha) - C_{D} \cdot cos(\alpha)" /></a>
 
-And since $C_L$ and $C_D$ depends only on $\alpha$, we can rewrite the equation:
+And since <a href="https://www.codecogs.com/eqnedit.php?latex=C_L" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_L" title="C_L" /></a> and <a href="https://www.codecogs.com/eqnedit.php?latex=C_D" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_D" title="C_D" /></a> depends only on <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha" title="\alpha" /></a>, we can rewrite the equation:
 
-$C_R(\alpha) = C_{L}(\alpha) \cdot sin(\alpha) - C_{D}(\alpha) \cdot cos(\alpha)$
+<a href="https://www.codecogs.com/eqnedit.php?latex=C_R(\alpha)&space;=&space;C_{L}(\alpha)&space;\cdot&space;sin(\alpha)&space;-&space;C_{D}(\alpha)&space;\cdot&space;cos(\alpha)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_R(\alpha)&space;=&space;C_{L}(\alpha)&space;\cdot&space;sin(\alpha)&space;-&space;C_{D}(\alpha)&space;\cdot&space;cos(\alpha)" title="C_R(\alpha) = C_{L}(\alpha) \cdot sin(\alpha) - C_{D}(\alpha) \cdot cos(\alpha)" /></a>
 
-so that $C_R$ depends on $\alpha$ only!
+so that <a href="https://www.codecogs.com/eqnedit.php?latex=C_R" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_R" title="C_R" /></a> depends on <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha" title="\alpha" /></a> only!
 
 ## Example - NACA 0015
 
@@ -92,7 +92,7 @@ Basically, this is what it looks like:
 
 Back in 2017, I got these coefficients from a free software called [Javafoil](https://www.mh-aerotools.de/airfoils/javafoil.htm). For this example I'll get data from the same website I got the picture above, [AirfoilTools.com](http://airfoiltools.com), using the Reynolds number approximately 200 (for information on Reynolds number, please check [this](https://en.wikipedia.org/wiki/Reynolds_number)).
 
-So now we're going to plot $C_L$, $C_D$ and $C_R$ against $\alpha$ to see what we're dealing with:
+So now we're going to plot <a href="https://www.codecogs.com/eqnedit.php?latex=C_L" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_L" title="C_L" /></a>, <a href="https://www.codecogs.com/eqnedit.php?latex=C_D" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_D" title="C_D" /></a> and <a href="https://www.codecogs.com/eqnedit.php?latex=C_R" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_R" title="C_R" /></a> against <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha" title="\alpha" /></a> to see what we're dealing with:
 
 <br>
 <table align="center">
@@ -115,7 +115,7 @@ So now we're going to plot $C_L$, $C_D$ and $C_R$ against $\alpha$ to see what w
 </table>
 <br>
 
-It is pretty intuitive that $C_D$ and $C_D$ are mirrored on $X^+$ and $X^-$, and $C_L$ on $X^+$ equals $-C_L$ on $X^-$, being $X$ the horizontal axis on the charts. This said, from now on we'll only use the $X^+$ side of them.
+It is pretty intuitive that <a href="https://www.codecogs.com/eqnedit.php?latex=C_D" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_D" title="C_D" /></a> and <a href="https://www.codecogs.com/eqnedit.php?latex=C_D" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_D" title="C_D" /></a> are mirrored on <a href="https://www.codecogs.com/eqnedit.php?latex=X^&plus;" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X^&plus;" title="X^+" /></a> and <a href="https://www.codecogs.com/eqnedit.php?latex=X^-" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X^-" title="X^-" /></a>, and <a href="https://www.codecogs.com/eqnedit.php?latex=C_L" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_L" title="C_L" /></a> on <a href="https://www.codecogs.com/eqnedit.php?latex=X^&plus;" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X^&plus;" title="X^+" /></a> equals <a href="https://www.codecogs.com/eqnedit.php?latex=-C_L" target="_blank"><img src="https://latex.codecogs.com/gif.latex?-C_L" title="-C_L" /></a> on <a href="https://www.codecogs.com/eqnedit.php?latex=X^-" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X^-" title="X^-" /></a>, being <a href="https://www.codecogs.com/eqnedit.php?latex=X" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X" title="X" /></a> the horizontal axis on the charts. This said, from now on we'll only use the <a href="https://www.codecogs.com/eqnedit.php?latex=X^&plus;" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X^&plus;" title="X^+" /></a> side of them.
 
 ### The stall issue
 
@@ -124,18 +124,18 @@ As we can see on the *"Lift coefficient vs Alpha"* chart, next to 14 degrees, it
 >[...]
 >[Flow separation](https://en.wikipedia.org/wiki/Flow_separation) begins to occur at small angles of attack while attached flow over the wing is still dominant. As angle of attack increases, the separated regions on the top of the wing increase in size and hinder the wing's ability to create lift. At the critical angle of attack, separated flow is so dominant that additional incr\alphaeases in angle of attack produce less lift and more drag." -- Wikipedia
 
-In other words, it may be risky to choose an *"ideal"* $\alpha$ greater than the *critical angle* ($\alpha_C$, from now on), even though its $C_R$ may be greater than $\alpha_C$'s.
+In other words, it may be risky to choose an *"ideal"* <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha" title="\alpha" /></a> greater than the *critical angle* (<a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_C" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_C" title="\alpha_C" /></a>, from now on), even though its <a href="https://www.codecogs.com/eqnedit.php?latex=C_R" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_R" title="C_R" /></a> may be greater than <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_C" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_C" title="\alpha_C" /></a>'s.
 
-### Choosing $\alpha$
+### Choosing Alpha
 
 Okay, now that we know how to do it, let's just do it!
 
-On the auxiliary code I uploaded, there's a function `max_value (data, x_label, y_label)` that returns the greatest $Y$ value in the dataset for the given $Y$ versus $X$ chart and its respective $X$ value. This considered, the output we get for $C_L \times \alpha$ and $C_R \times \alpha$, respectively, is the following:
+On the auxiliary code I uploaded, there's a function `max_value (data, x_label, y_label)` that returns the greatest <a href="https://www.codecogs.com/eqnedit.php?latex=Y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Y" title="Y" /></a> value in the dataset for the given <a href="https://www.codecogs.com/eqnedit.php?latex=Y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Y" title="Y" /></a> versus <a href="https://www.codecogs.com/eqnedit.php?latex=X" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X" title="X" /></a> chart and its respective <a href="https://www.codecogs.com/eqnedit.php?latex=X" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X" title="X" /></a> value. This considered, the output we get for <a href="https://www.codecogs.com/eqnedit.php?latex=C_L&space;\times&space;\alpha" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_L&space;\times&space;\alpha" title="C_L \times \alpha" /></a> and <a href="https://www.codecogs.com/eqnedit.php?latex=C_R&space;\times&space;\alpha" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_R&space;\times&space;\alpha" title="C_R \times \alpha" /></a>, respectively, is the following:
 
 `(14.25, 1.2139)`
 `(14.5, 0.254183875029455)`
 
-This is pretty clear if we plot both $C_L$ (in red) and $C_R$ (in green), as follows:
+This is pretty clear if we plot both <a href="https://www.codecogs.com/eqnedit.php?latex=C_L" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_L" title="C_L" /></a> (in red) and <a href="https://www.codecogs.com/eqnedit.php?latex=C_R" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_R" title="C_R" /></a> (in green), as follows:
 
 <br>
 <table align="center">
@@ -144,15 +144,15 @@ This is pretty clear if we plot both $C_L$ (in red) and $C_R$ (in green), as fol
 </table>
 <br>
 
-Being aware of the *stall* issue, we shall consider taking our $\alpha = 14.25$ instead of $14.5$ but, as curious as I am, I got to check the difference it will bring me, so I'll check the value of $C_R$ for $\alpha = 14.25$ too.
+Being aware of the *stall* issue, we shall consider taking our <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha&space;=&space;14.25" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha&space;=&space;14.25" title="\alpha = 14.25" /></a> instead of <a href="https://www.codecogs.com/eqnedit.php?latex=14.5" target="_blank"><img src="https://latex.codecogs.com/gif.latex?14.5" title="14.5" /></a> and, as curious as I am, I got to check the difference it will bring me, so I'll check the value of <a href="https://www.codecogs.com/eqnedit.php?latex=C_R" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_R" title="C_R" /></a> for <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha&space;=&space;14.25" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha&space;=&space;14.25" title="\alpha = 14.25" /></a> too.
 
-In this particular example, $C_R = 0.253639$ for $\alpha = 14.25$, which will give me 
+In this particular example, <a href="https://www.codecogs.com/eqnedit.php?latex=C_R&space;=&space;0.253639" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_R&space;=&space;0.253639" title="C_R = 0.253639" /></a> for <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha&space;=&space;14.25" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha&space;=&space;14.25" title="\alpha = 14.25" /></a>, which will give me 
 
-$\frac{C_R(14.25)}{C_R(14.5)} = \frac{0.253639}{0.254183} = 99,8\%$ of the best performance according to this model.
+<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{C_R(14.25)}{C_R(14.5)}&space;=&space;\frac{0.253639}{0.254183}&space;=&space;99,8\%" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{C_R(14.25)}{C_R(14.5)}&space;=&space;\frac{0.253639}{0.254183}&space;=&space;99,8\%" title="\frac{C_R(14.25)}{C_R(14.5)} = \frac{0.253639}{0.254183} = 99,8\%" /></a> of the best performance according to this model.
 
 This is a risk I, personally, wouldn't take, considering the tiny difference on performance. So, for this example, we'll be assuming 
 
->$\alpha = 14.25$
+><a href="https://www.codecogs.com/eqnedit.php?latex=\alpha&space;=&space;14.25" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha&space;=&space;14.25" title="\alpha = 14.25" /></a>
 
 as our final answer.
 
